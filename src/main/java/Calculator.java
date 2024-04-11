@@ -33,7 +33,11 @@ public class Calculator {
                     System.out.println("Введите цену товара (в формате рубли,копейки):");
                     count = scanner.nextDouble();
                     scanner.nextLine();
-                    validInput = true;
+                    if(count <= 0) {
+                        showErrorMessage();
+                    } else {
+                        validInput = true; // Переместите это в else блок, чтобы продолжить запрос только в случае корректного ввода
+                    }
                 } catch (InputMismatchException e) {
                     System.out.println("Некорректный ввод. Пожалуйста, введите цену товара заново.");
                     scanner.nextLine(); // Очистить буфер ввода
@@ -71,6 +75,10 @@ public class Calculator {
                     (amount % 10 == 1 && amount % 100 != 11) ? "ль"
                             : (amount % 10 >= 2 && amount % 10 <= 4
                             && (amount % 100 < 10 || amount % 100 >= 20)) ? "ля" : "лей");
+    }
+
+    private static void showErrorMessage() {
+        System.out.println("Цена не может быть отрицательной или нулём.");
     }
 
 }
